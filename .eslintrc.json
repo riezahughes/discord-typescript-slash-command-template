@@ -18,6 +18,8 @@
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "no-console": 1, // Means warning
-    "prettier/prettier": 2 // Means error
+    "prettier/prettier": 2, // Means error
+    "@typescript-eslint/no-var-requires": 0,
+    "camelcase": "off"
   }
 }
