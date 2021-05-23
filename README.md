@@ -19,3 +19,4 @@ A simple scaffolding for building a discord bot with slash commands.
 ## Quick Notes
 
 Create a command to offer oauth access (use the package discord-oauth for this)
+Discord.js package used has a proken snowflake function. It should be snowflakeUtils not snowflake being called. Needs a PR

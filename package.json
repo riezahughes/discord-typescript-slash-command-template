@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -p ./",
+    "connect": "node ./build/connect.js",
     "start": "npm run build && node ./build/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,9 +23,9 @@
     "prettier": "^2.3.0"
   },
   "dependencies": {
-    "discord.js": "^12.5.3",
+    "discord-slash-commands-client": "^1.2.1",
+    "discord.js": "git+https://github.com/MatteZ02/discord.js.git",
     "dotenv": "^10.0.0",
-    "node-fetch": "^2.6.1",
     "typescript": "^4.2.4"
   }
 }
