@@ -15,3 +15,7 @@ A simple scaffolding for building a discord bot with slash commands.
 - [ ] Set up intial ping pong slash command NO BOT YET
 - [ ] Add reaction control defaults
 - [ ] Link into a third party example library
+
+## Quick Notes
+
+Create a command to offer oauth access (use the package discord-oauth for this)
