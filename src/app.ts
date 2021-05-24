@@ -1,4 +1,4 @@
-import { Interaction, MessageEmbed, Intents } from "discord.js";
+import { Interaction, Intents } from "discord.js";
 
 import dotenv from "dotenv";
 
