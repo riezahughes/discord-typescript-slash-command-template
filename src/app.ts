@@ -4,10 +4,18 @@ import dotenv from "dotenv";
 
 import CreateRole from "./commands/createRole";
 
+import RoleList from "./roles.json";
+
 dotenv.config();
 
 const Discord = require("discord.js");
 const interactions = require("discord-slash-commands-client");
+
+interface Roles {
+  name: string;
+  description: string;
+  id: string;
+}
 
 // create a new client
 const client = new Discord.Client({
@@ -20,39 +28,22 @@ client.interactions = new interactions.Client(token, "845642901689204747");
 
 // attach and event listener for the ready event
 client.on("ready", () => {
-  console.log("Client is ready!");
-
-  // Create a new command that we can test
-  client.interactions
-    .createCommand({
-      name: "starcitizen",
-      description: "Grant/Revoke Star Citizen role for user",
-    })
-    .then(console.log)
-    .catch(console.error);
+  console.log("Bot starting up. Setting up slash commands with discord...");
+  RoleList.forEach((role, i: number) => {
+    setTimeout(() => {
+      client.interactions
+        .createCommand({
+          name: role.name,
+          description: role.description,
+        })
+        .then(console.log)
+        .catch(console.error);
+    }, i * 10000);
+  });
 });
-
 // attach and event listener for the interactionCreate event
 client.on("interactionCreate", async (interaction: Interaction) => {
-  if (interaction.name === "starcitizen") {
-    // send an initial reply
-
-    await interaction.reply(CreateRole("starcitizen"));
-
-    // send a followup
-    // const messageId = await interaction.reply({
-    //   content: "Follow up message",
-    //   embeds: [new MessageEmbed().setDescription("Follow up test")],
-    // });
-
-    // setTimeout(() => {
-    //   // delete initial reply
-    //   interaction.delete();
-
-    //   // edit 1st followup
-    //   interaction.edit("Edited follow up message", messageId);
-    // }, 5000);
-  }
+  await interaction.reply(CreateRole(interaction.name));
 });
 
 // login
