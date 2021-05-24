@@ -2,6 +2,8 @@ import { Interaction, MessageEmbed, Intents } from "discord.js";
 
 import dotenv from "dotenv";
 
+import CreateRole from "./commands/createRole";
+
 dotenv.config();
 
 const Discord = require("discord.js");
@@ -12,7 +14,6 @@ const client = new Discord.Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
 const token = process.env.DISCORD_TOKEN;
-console.log(`token is ${token}`);
 
 // attach the interaction client to discord.js client
 client.interactions = new interactions.Client(token, "845642901689204747");
@@ -24,8 +25,8 @@ client.on("ready", () => {
   // Create a new command that we can test
   client.interactions
     .createCommand({
-      name: "ping",
-      description: "ping pong",
+      name: "starcitizen",
+      description: "Grant/Revoke Star Citizen role for user",
     })
     .then(console.log)
     .catch(console.error);
@@ -33,23 +34,24 @@ client.on("ready", () => {
 
 // attach and event listener for the interactionCreate event
 client.on("interactionCreate", async (interaction: Interaction) => {
-  if (interaction.name === "ping") {
+  if (interaction.name === "starcitizen") {
     // send an initial reply
-    await interaction.reply("Pong");
+
+    await interaction.reply(CreateRole("starcitizen"));
 
     // send a followup
-    const messageId = await interaction.reply({
-      content: "Follow up message",
-      embeds: [new MessageEmbed().setDescription("Follow up test")],
-    });
+    // const messageId = await interaction.reply({
+    //   content: "Follow up message",
+    //   embeds: [new MessageEmbed().setDescription("Follow up test")],
+    // });
 
-    setTimeout(() => {
-      // delete initial reply
-      interaction.delete();
+    // setTimeout(() => {
+    //   // delete initial reply
+    //   interaction.delete();
 
-      // edit 1st followup
-      interaction.edit("Edited follow up message", messageId);
-    }, 5000);
+    //   // edit 1st followup
+    //   interaction.edit("Edited follow up message", messageId);
+    // }, 5000);
   }
 });
 
