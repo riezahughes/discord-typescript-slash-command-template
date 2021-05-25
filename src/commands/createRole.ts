@@ -1,8 +1,22 @@
+import { Client, Interaction } from "discord.js";
 import RoleList from "../roles.json";
 
-const CreateRole = (role: string): string => {
-  if (!RoleList.some((roleItem) => roleItem.name === role))
+const RoleAssignment = (
+  interactObject: Interaction,
+  client: Client
+): string => {
+  // console.log(client.guilds);
+  const RoleToApply = RoleList.find(
+    (roleItem) => roleItem.name === interactObject.name
+  );
+  console.log(interactObject.member?.roles);
+  if (!RoleToApply)
     return "Probem adding role to your account. Please contact an administrator";
-  return `${role} role has been added to your account`;
+  try {
+    // connect to the guild, find the user and add the role based on the
+  } catch (error) {
+    console.error(error);
+  }
+  return `:white_check_mark:   \` ${interactObject.name} \` role has been added for you on this server`;
 };
-export default CreateRole;
+export default RoleAssignment;
