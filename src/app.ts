@@ -2,7 +2,7 @@ import { Interaction, Intents } from "discord.js";
 
 import dotenv from "dotenv";
 
-import RoleAssignment from "./commands/createRole";
+import RoleAssignment from "./commands/assignRole";
 
 import RoleList from "./roles.json";
 
@@ -11,20 +11,21 @@ dotenv.config();
 const Discord = require("discord.js");
 const interactions = require("discord-slash-commands-client");
 
-interface Roles {
-  name: string;
-  description: string;
-  id: string;
-}
-
 // create a new client
 const client = new Discord.Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+  intents: [
+    Intents.FLAGS.GUILDS,
+    Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.GUILD_MEMBERS,
+  ],
 });
 const token = process.env.DISCORD_TOKEN;
 
 // attach the interaction client to discord.js client
-client.interactions = new interactions.Client(token, "845642901689204747");
+client.interactions = new interactions.Client(
+  token,
+  process.env.DISCORD_CLIENT
+);
 
 // attach and event listener for the ready event
 client.on("ready", () => {
