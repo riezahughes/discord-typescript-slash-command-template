@@ -2,7 +2,7 @@ import { Interaction, Intents } from "discord.js";
 
 import dotenv from "dotenv";
 
-import CreateRole from "./commands/createRole";
+import RoleAssignment from "./commands/createRole";
 
 import RoleList from "./roles.json";
 
@@ -43,7 +43,7 @@ client.on("ready", () => {
 });
 // attach and event listener for the interactionCreate event
 client.on("interactionCreate", async (interaction: Interaction) => {
-  await interaction.reply(CreateRole(interaction.name));
+  await interaction.reply(RoleAssignment(interaction, client));
 });
 
 // login
